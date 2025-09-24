@@ -1,0 +1,8 @@
+○ Pets: Tabela que armazena informações dos pets (id, nome, espécie, idade,
+descrição, status).
+○ Adotantes: Tabela que armazena informações dos adotantes (id, nome,
+email, telefone, endereço).
+○ Adoções: Tabela que registra as adoções realizadas, com referência ao pet
+e adotante (id, pet_id, adotante_id, data_adocao).
+
+estado_adocao = 'adotado' OU 'não-adotado'
