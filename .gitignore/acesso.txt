@@ -1,6 +1,0 @@
-Dbeaver:
-Username: gabriel-estelet
-Password: gabrexe
-
-PostgreSQL superuser:
-caramelo123
