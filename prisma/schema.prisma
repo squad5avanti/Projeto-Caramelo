@@ -37,5 +37,5 @@ model pets {
 
 enum estado_adocao {
   adotado
-  n_o_adotado @map("não-adotado")
+  nao_adotado @map("não-adotado")
 }
