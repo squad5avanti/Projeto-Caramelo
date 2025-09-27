@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model adocoes {
+  adocao_id    Int       @id @default(autoincrement())
+  pets_id      Int       @default(autoincrement())
+  adotantes_id Int       @default(autoincrement())
+  data_adocao  DateTime  @db.Date
+  adotantes    adotantes @relation(fields: [adotantes_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  pets         pets      @relation(fields: [pets_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model adotantes {
+  id       Int       @id @default(autoincrement())
+  nome     String    @db.VarChar(50)
+  email    String    @unique @db.VarChar(50)
+  telefone String    @unique @db.Char(11)
+  endereco String    @db.VarChar(50)
+  adocoes  adocoes[]
+}
+
+model pets {
+  id        Int           @id @default(autoincrement())
+  nome      String        @db.VarChar(50)
+  especie   String        @db.VarChar(50)
+  idade     Int
+  descricao String?       @db.VarChar(100)
+  status    estado_adocao
+  adocoes   adocoes[]
+}
+
+enum estado_adocao {
+  adotado
+  n_o_adotado @map("não-adotado")
+}
