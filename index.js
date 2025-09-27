@@ -38,7 +38,6 @@ app.put("/pets/:id", async (request, response) => {
 
     return response.status(200).json(pet);
 })
-
 app.delete("/pets/:id", async (request, response) => {
     const { id } = request.params;
     const petExist = await prismaClient.pets.findUnique({ 
@@ -48,11 +47,12 @@ app.delete("/pets/:id", async (request, response) => {
     if (!petExist) {
         return response.status(404).json({message: "Pet não encontrado"});
     }
+    await prismaClient.pets.delete({
+    where: { id: parseInt(id) }
+  });
 
     return response.status(200).json("Cadastro deletado com sucesso!");
 })
-
-
 
 app.listen(8081, () => {
     console.log("Running port 8081")
