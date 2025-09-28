@@ -12,7 +12,7 @@ CREATE TABLE pets
     idade integer NOT NULL,
     descricao VARCHAR(100),
     status estado_adocao NOT NULL
-)
+);
 
 CREATE TABLE adotantes
 (
@@ -21,12 +21,16 @@ CREATE TABLE adotantes
     email VARCHAR(50) UNIQUE NOT NULL,
     telefone CHAR(11) UNIQUE NOT NULL,
     endereco VARCHAR(50) NOT NULL
-)
+);
 
 CREATE TABLE adocoes
 (
-    adocao_id SERIAL PRIMARY KEY,
-    FOREIGN KEY (pets_id) REFERENCES pets(id),
-    FOREIGN KEY (adotantes_id) REFERENCES adotantes(id),
+    id SERIAL PRIMARY KEY,
+    pets_id INT NOT NULL,
+    adotantes_id INT NOT NULL,
     data_adocao date NOT NULL,
-)
+    CONSTRAINT pets_id
+    FOREIGN KEY (pets_id) REFERENCES pets(id),
+    CONSTRAINT adotantes_id
+    FOREIGN KEY (adotantes_id) REFERENCES adotantes(id)
+);
