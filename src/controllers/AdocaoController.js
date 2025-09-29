@@ -1,10 +1,4 @@
-import express from "express"
-import { PrismaClient } from "@prisma/client";
-
-
-const app = express();
-app.use(express.json());
-const prismaClient = new PrismaClient();
+import { prismaClient } from "../database/PrismaClient.js";
 
 //adoção
 app.get("/adocoes", async (request, response) => {
