@@ -1,11 +1,9 @@
 import { prismaClient } from "../database/PrismaClient.js";
 
 export class AdotanteController {
-    async encontrarTodosAdotantes (request, response) {
+    async obterTodosAdotantes (request, response) {
         try {
-            const adotantes = await prismaClient.adotantes.findMany({
-                select: {id: true, nome: true, email: true, telefone: true, endereco: true}
-            });
+            const adotantes = await prismaClient.adotantes.findMany();
             return response.status(200).json(adotantes);
         }
         catch (error) {
