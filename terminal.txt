@@ -28,5 +28,3 @@ npm install bcryptjs jsonwebtoken
 
 Instalando
 npm install joi
-
-teste

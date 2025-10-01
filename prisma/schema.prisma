@@ -8,34 +8,53 @@ datasource db {
 }
 
 model adocoes {
-  adocao_id    Int       @id @default(autoincrement())
-  pets_id      Int       @default(autoincrement())
-  adotantes_id Int       @default(autoincrement())
+  id           Int       @id @default(autoincrement())
+  pets_id      Int
+  adotantes_id Int
   data_adocao  DateTime  @db.Date
-  adotantes    adotantes @relation(fields: [adotantes_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  pets         pets      @relation(fields: [pets_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  adotantes    adotantes @relation(fields: [adotantes_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "adotantes_id_fk")
+  pets         pets      @relation(fields: [pets_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pets_id_fk")
 }
 
 model adotantes {
   id       Int       @id @default(autoincrement())
   nome     String    @db.VarChar(50)
   email    String    @unique @db.VarChar(50)
-  telefone String    @unique @db.Char(11)
+  telefone String    @db.VarChar(50)
   endereco String    @db.VarChar(50)
   adocoes  adocoes[]
 }
 
 model pets {
-  id        Int           @id @default(autoincrement())
-  nome      String        @db.VarChar(50)
-  especie   String        @db.VarChar(50)
-  idade     Int
-  descricao String?       @db.VarChar(100)
-  status    estado_adocao
-  adocoes   adocoes[]
+  id            Int       @id @default(autoincrement())
+  nome          String    @unique @db.VarChar(50)
+  especie       String    @db.VarChar(50)
+  nascimento    DateTime  @db.Date
+  descricao     String?   @db.VarChar(100)
+  estado        estado
+  tamanho       tamanho?
+  personalidade String?   @db.VarChar(50)
+  avatar        String?
+  fotos         String?
+  adocoes       adocoes[]
 }
 
-enum estado_adocao {
+model usuarios {
+  id           Int      @id @default(autoincrement())
+  nome         String   @db.VarChar(50)
+  telefone     String   @db.VarChar(50)
+  email        String   @unique @db.VarChar(50)
+  senha        String
+  usuarioadmin Boolean? @default(false)
+}
+
+enum estado {
   adotado
-  nao_adotado @map("não-adotado")
+  disponivel
+}
+
+enum tamanho {
+  pequeno
+  medio
+  grande
 }

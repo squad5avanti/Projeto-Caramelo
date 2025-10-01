@@ -1,55 +1,72 @@
 import { prismaClient } from "../database/PrismaClient.js";
 
-app.get("/pets", async (request, response) => {
-    const pets = await prismaClient.pets.findMany();
-    return response.json(pets).send();
-});
+export class PetController {
 
-app.post("/pets", async (request, response) => {
-    const { nome, especie, idade, descricao, status } = request.body;
-    const pets = await prismaClient.pets.create({
-        data: { nome, especie, idade, descricao, status }
-    })
-
-    const { nome, especie, idade, descricao, status } = request.body;
-    const pets = await prismaClient.pets.create({
-        data: { nome, especie, idade, descricao, status }
-    })
-
-    return response.status(201).json(pets);
-})
-
-app.put("/pets/:id", async (request, response) => {
-    const { id } = request.params;
-    const { nome, especie, idade, descricao, status } = request.body;
-
-    const petExist = await prismaClient.pets.findUnique({
-        where: { id: parseInt(id) }
-    })
-
-    if (!petExist) {
-        return response.status(404).json({ message: "Pet não encontrado" });
+    async obterTodosPets (request, response) {
+        try{
+            const pets = await prismaClient.pets.findMany({
+                select: {
+                    nome: true, especie: true, nascimento: true, descricao: true, estado: true, tamanho: true, personalidade: true, avatar: true, fotos: true
+                }
+            });
+            return response.status(200).json(pets);
+        } catch(error){
+            return response.status(500).json(error);
+        }
     }
 
-    const pet = await prismaClient.pets.update({
-        data: { nome, especie, idade, descricao, status },
-        where: { id: parseInt(id) }
-    })
-
-    return response.status(200).json(pet);
-})
-app.delete("/pets/:id", async (request, response) => {
-    const { id } = request.params;
-    const petExist = await prismaClient.pets.findUnique({
-        where: { id: parseInt(id) }
-    })
-
-    if (!petExist) {
-        return response.status(404).json({ message: "Pet não encontrado" });
+    async salvarPet (request, response) {
+        try {
+            const { nome, especie, nascimento, descricao, estado, tamanho, personalidade, avatar, fotos } = request.body;
+            const adotante = await prismaClient.pets.create({
+                data: {nome, especie, nascimento, descricao, estado, tamanho, personalidade, avatar, fotos},
+            });
+            return response.status(201).json(pets);
+        } catch (error) {
+            return response.status(500).json(error);
+        }
     }
-    await prismaClient.pets.delete({
-        where: { id: parseInt(id) }
-    });
 
-    return response.status(200).json("Cadastro deletado com sucesso!");
-});
+    async atualizarPet (request, response) {
+        const {id} = request.params;
+        const { nome, especie, nascimento, descricao, estado, tamanho, personalidade, avatar, fotos } = request.body;
+
+        try {
+            const petExiste = await prismaClient.pets.findUnique({
+                where: {id: parseInt(id)}
+            });
+
+            if(!petExiste)
+                return response.status(404).json("Pet não encontrado");
+
+            const pet = await prismaClient.pets.update({
+                data: { nome, especie, nascimento, descricao, estado, tamanho, personalidade, avatar, fotos },
+                where: {id: parseInt(id)}
+            });
+            return response.status(200).json(pet);
+        } catch (error) {
+            return response.status(500).json(error);
+        }
+    }
+
+    async removerPet (request, response) {
+        const {id} = request.params;
+
+        try {
+            const petExiste = await prismaClient.pets.findUnique({
+                where: {id: parseInt(id)}
+            });
+
+            if(!petExiste)
+                return response.status(404).json("Pet não encontrado");
+
+            await prismaClient.pets.delete({
+                where: {id: parseInt(id)}
+            });
+
+            return response.status(204).send();
+        } catch (error) {
+            return response.status(500).json(error);
+        }
+    }
+}

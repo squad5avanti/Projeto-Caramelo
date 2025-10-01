@@ -1,0 +1,9 @@
+-- CRIAÇÃO DA TABELA Adotantes CONFORME REQUISITOS
+CREATE TABLE Adotantes
+(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
+    telefone VARCHAR(50) NOT NULL,
+    endereco VARCHAR(50) NOT NULL
+);

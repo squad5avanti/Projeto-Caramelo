@@ -1,0 +1,26 @@
+SQUAD 5
+Composto por:
+
+Andre dos Santos Vieira
+(Ausente)
+
+Fernanda Menezes Ribeiro
+(Front-end, Back-end)
+
+Gabriel Estelet da Costa Paes
+(Back-end, Banco de Dados)
+
+Jaycee Loueny Felix Camara
+(Banco de dados)
+
+Matheus Lima Barrêto
+(Front-end)
+
+Mayara Amaral
+(Back-end)
+
+Sara Ferreira de Lara
+(Back-end)
+
+FACILITADORA
+Alyne
