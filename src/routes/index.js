@@ -14,24 +14,28 @@ const petController = new PetController();
 const userController = new UserController();
 const loginController = new LoginController();
 
-router.get("/usuarios",userController.obterTodosUsuarios); 
-router.post("/usuarios",userController.salvarUsuario);
-router.put("/usuarios/:id",authenticate,userController.atualizarUsuario); 
+router.get("/usuarios",authorization,userController.obterTodosUsuarios); 
+router.post("/usuarios",authorization,userController.salvarUsuario);
+router.put("/usuarios/:id",authorization,userController.atualizarUsuario); 
 router.delete("/usuarios/:id",authorization,userController.excluirUsuario);
 
-router.get("/adotantes",adotanteController.obterTodosAdotantes);
-router.post("/adotantes",adotanteController.salvarAdotante);
-router.put("/adotantes/:id",authenticate,adotanteController.atualizarAdotante);
+router.get("/adotantes",authorization,adotanteController.obterTodosAdotantes);
+router.post("/adotantes",authorization,adotanteController.salvarAdotante);
+router.put("/adotantes/:id",authorization,adotanteController.atualizarAdotante);
 router.delete("/adotantes/:id",authorization,adotanteController.removerAdotante);
 
-router.get("/adocoes",adocaoController.obterTodasAdocoes);
-router.post("/adocoes",adocaoController.salvarAdocao);
-router.put("/adocoes/:id",authenticate,adocaoController.atualizarAdocao);
+router.get("/adocoes",authorization,adocaoController.obterTodasAdocoes);
+router.post("/adocoes",authorization,adocaoController.salvarAdocao);
+router.put("/adocoes/:id",authorization,adocaoController.atualizarAdocao);
 router.delete("/adocoes/:id",authorization,adocaoController.removerAdocao);
 
-router.get("/pets",petController.obterTodosPets);
-router.post("/pets",petController.salvarPet);
-router.put("/pets/:id",authenticate,petController.atualizarPet);
+/* 
+Usuários logados no site vão conseguir acessar a lista de pets do abrigo bem como cadastrar seus pets para futura aprovação dos administradores do abrigo.
+Atualizar e remover pets do cadastro é uma funcionalidade restrita aos administradores, ou seja, Usuários que tem permissão "usuarioadmin" como "true" no banco de dados.
+*/
+router.get("/pets",authenticate,petController.obterTodosPets);
+router.post("/pets",authenticate,petController.salvarPet);
+router.put("/pets/:id",authorization,petController.atualizarPet);
 router.delete("/pets/:id",authorization,petController.removerPet);
 
 router.post("/login", loginController.login);
