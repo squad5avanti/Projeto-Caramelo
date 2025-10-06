@@ -14,7 +14,7 @@ async function main() {
       telefone: "11999999999",
       email: "admin@caramelo.com",
       senha: senhaCriptografada,
-      usuarioAdmin: true
+      usuarioadmin: true
     },
   });
 
