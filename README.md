@@ -16,7 +16,9 @@ Aplicação web para cadastramento e controle voltada para um abrigo de pets, de
 
 1. Clonar o repositório;
 
-2. Instalar as dependências:
+2. Caso necessário, excluir as pasta "node_modules" e "prisma" para evitar conflitos;
+
+2.1. Instalar as dependências do projeto:
 
 ```bash
 npm install
@@ -68,7 +70,7 @@ npm run seed
 npm install bcryptjs
 ```
 
-8. Inicializar o servidor:
+7. Inicializar o servidor:
    
 ```bash
 npm start
