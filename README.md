@@ -56,10 +56,10 @@ npx prisma generate
 npx prisma migrate dev
 ```
 
-5. Executar o script de criação do primeiro usuário padrão com permissão de Administrador "seed.js", localizado em src/database/prisma:
+5. Executar o script de criação do primeiro usuário padrão com permissão de Administrador "seed.js", localizado em /prisma:
 
 ```bash
-seed.js
+npm run seed
 ```
 
 6. Inicializar o servidor:
