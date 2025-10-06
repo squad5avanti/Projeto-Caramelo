@@ -15,7 +15,7 @@ export class AdocaoController {
         try{
             const { pets_id, adotantes_id, data_adocao  } = request.body;
             const adocoes = await prismaClient.adocoes.create({
-                data: { pets_id, adotantes_id, data_adocao: new Date (data_adocao) }
+                data: { pets_id, adotantes_id, data_adocao }
             });
             return response.status(201).json(adocoes);
         } catch (error) {
@@ -29,7 +29,7 @@ export class AdocaoController {
             const { pets_id, adotantes_id, data_adocao } = request.body;
         
             const adoptionExist = await prismaClient.adocoes.findUnique({ 
-                where: { adocao_id: parseInt(id) }
+                where: { id: parseInt(id) }
             });
 
             if (!adoptionExist) {
@@ -37,8 +37,11 @@ export class AdocaoController {
             }
 
             const adocao = await prismaClient.adocoes.update({
-                data : { pets_id, adotantes_id, data_adocao: new Date (data_adocao) },
-                where: { adocao_id: parseInt(id) }
+                data : { pets_id, adotantes_id, data_adocao },
+                where: { id: parseInt(id) }
+                select: {
+                    pets_id: true, adotantes_id: true, data_adocao: true
+                }
             });
     
             return response.status(200).json(adocao);
@@ -51,14 +54,14 @@ export class AdocaoController {
         try {
             const { id } = request.params;
             const adoptionExist = await prismaClient.adocoes.findUnique({ 
-                where: { adocao_id: parseInt(id) }
+                where: { id: parseInt(id) }
             });
     
             if (!adoptionExist) {
                 return response.status(404).json({message: "Adoção não encontrada"});
             }
             await prismaClient.adocoes.delete({
-                where: { adocao_id: parseInt(id) }
+                where: { id: parseInt(id) }
             });
     
             return response.status(200).json("Cadastro deletado com sucesso!");
