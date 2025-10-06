@@ -32,7 +32,13 @@ SECRET_JWT="[senha_gerada_aleatoriamente]"
 
 4. Conectar o Prisma ORM com o banco de dados local acessível por meio do endereço em "DATABASE_URL" (4.1) OU através de migration (4.2).
 
-4.1. Importar banco de dados PostgreSQL para o Prisma:
+4.1. Inicialização do Prisma ORM:
+
+```bash
+npx prisma init
+```
+
+4.2. Importar banco de dados PostgreSQL para o Prisma:
 
 ```bash
 npx prisma db pull
