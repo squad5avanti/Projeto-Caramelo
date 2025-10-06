@@ -58,16 +58,16 @@ npx prisma generate
 npx prisma migrate dev
 ```
 
-5. Executar o script de criação do primeiro usuário padrão com permissão de Administrador "seed.js", localizado em /prisma:
-
-```bash
-npm run seed
-```
-
-6. Instalar o módulo bcryptjs:
+5. Instalar o módulo bcryptjs:
 
 ```bash
 npm install bcryptjs
+```
+
+6. Executar o script de criação do primeiro usuário padrão com permissão de Administrador "seed.js", localizado em /prisma:
+
+```bash
+npm run seed
 ```
 
 7. Inicializar o servidor:
