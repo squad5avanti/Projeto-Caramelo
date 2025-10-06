@@ -50,8 +50,20 @@ npx prisma generate
 npx prisma migrate dev
 ```
 
-5. Iniciar a aplicação:
+5. Executar o script de criação do primeiro usuário padrão com permissão de Administrador "seed.js", localizado em src/database/prisma:
 
+```bash
+seed.js
+```
+
+6. Inicializar o servidor:
+   
 ```bash
 npm start
 ```
+
+## INFORMAÇÕES ADICIONAIS
+
+O tipo "DateTime" do Prisma, utilizado no campo "nascimento" da tabela Pets, funciona de acordo na formatação "YYYY-MM-DDTHH:MM:SS.mmmZ", em que "YYYY-MM-DD" (ANO-MÊS-DIA) é o formato de data registrado no banco PostgreSQL, "THH : MM : SS . mmmZ" (HORA : MINUTO : SEGUNDO . MILÉSIMO) é o formato complementar "Time" que adiciona precisão de horário do dia. A formatação "YYYY-MM-DDTHH:MM:SS.mmmZ" deve ser utilizada no JSON para interação com a tabela Pets, ex.: "2025-01-01T00:00:00.000Z" que significa o dia 01/01/2025 às 00:00 horas e 0 milésimos de segundo.
+
+
