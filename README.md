@@ -62,7 +62,13 @@ npx prisma migrate dev
 npm run seed
 ```
 
-6. Inicializar o servidor:
+6. Instalar o módulo bcryptjs:
+
+```bash
+npm install bcryptjs
+```
+
+8. Inicializar o servidor:
    
 ```bash
 npm start
