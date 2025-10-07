@@ -64,7 +64,7 @@ npx prisma migrate dev
 npm install bcryptjs
 ```
 
-6. Executar o script de criação do primeiro usuário padrão com permissão de Administrador "seed.js", localizado em /prisma:
+6. Executar o script de criação do primeiro usuário padrão com permissão de Administrador "seed.js", localizado em /prisma (modificar a senha padrão ou criar um novo!):
 
 ```bash
 npm run seed
