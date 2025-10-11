@@ -8,7 +8,7 @@ CREATE TYPE TAMANHO AS ENUM ('pequeno', 'medio', 'grande');
 CREATE TYPE SITUACAO AS ENUM ('pendente', 'aceito');
 
 -- CRIAÇÃO DE TIPO PERSONALIZADO PARA CAMPO "sexo" NA TABELA Pets
-CREATE TYPE SEXO AS ENUM ('macho', 'femea');
+CREATE TYPE SEXO AS ENUM ('macho', 'femea', 'outro');
 
 -- CRIAÇÃO DA TABELA Pets CONFORME REQUISITOS
 CREATE TABLE Pets
@@ -21,9 +21,9 @@ CREATE TABLE Pets
     estado ESTADO NOT NULL,
     situacao SITUACAO NOT NULL,
     vacinado BOOLEAN NOT NULL,
-    peso INT, 
+    peso NUMERIC(4, 3) CHECK (peso >= 0), 
     sexo SEXO NOT NULL,
-    tamanho TAMANHO,
+    tamanho TAMANHO NOT NULL,
     personalidade VARCHAR(50),
     avatar TEXT,
     fotos TEXT
