@@ -38,7 +38,7 @@ export class AdocaoController {
 
             const adocao = await prismaClient.adocoes.update({
                 data : { pets_id, adotantes_id, data_adocao },
-                where: { id: parseInt(id) }
+                where: { id: parseInt(id) },
                 select: {
                     pets_id: true, adotantes_id: true, data_adocao: true
                 }
