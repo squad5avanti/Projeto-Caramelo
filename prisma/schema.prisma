@@ -32,7 +32,11 @@ model pets {
   nascimento    DateTime  @db.Date
   descricao     String?   @db.VarChar(100)
   estado        estado
-  tamanho       tamanho?
+  situacao      situacao
+  vacinado      Boolean
+  peso          Decimal?  @db.Decimal(4, 3)
+  sexo          sexo
+  tamanho       tamanho
   personalidade String?   @db.VarChar(50)
   avatar        String?
   fotos         String?
@@ -49,6 +53,7 @@ model usuarios {
 }
 
 enum estado {
+  reservado
   adotado
   disponivel
 }
@@ -57,4 +62,15 @@ enum tamanho {
   pequeno
   medio
   grande
+}
+
+enum sexo {
+  macho
+  femea
+  outro
+}
+
+enum situacao {
+  pendente
+  aceito
 }
