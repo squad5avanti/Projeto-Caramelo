@@ -21,7 +21,7 @@ CREATE TABLE Pets
     estado ESTADO NOT NULL,
     situacao SITUACAO NOT NULL,
     vacinado BOOLEAN NOT NULL,
-    peso NUMERIC(4, 3) CHECK (peso >= 0), 
+    peso NUMERIC(5, 3) CHECK (peso >= 0), 
     sexo SEXO NOT NULL,
     tamanho TAMANHO NOT NULL,
     personalidade VARCHAR(50),
