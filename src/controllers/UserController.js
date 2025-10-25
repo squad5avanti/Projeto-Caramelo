@@ -43,8 +43,7 @@ export class UserController {
 
     async atualizarUsuario(request, response) {
         const { id } = request.params;
-        const { nome, email, telefone, usuarioadmin } = request.body;
-        let { senha } = request.body;
+        const { nome, telefone, email, usuarioadmin, senha } = request.body;
 
         try{
             const userExist = await prismaClient.usuarios.findUnique({
@@ -55,10 +54,10 @@ export class UserController {
                 return response.status(404).json("Usuário nao encontrado");
             }
 
-            senha = bcrypt.hashSync(senha, 10);
+            const passHash = bcrypt.hashSync(senha, 10);
 
             const user = await prismaClient.usuarios.update({
-                data : { nome, email, telefone, usuarioadmin, senha },
+                data : { nome, telefone, email, usuarioadmin, senha: passHash },
                 where: { id: parseInt(id) },
                 select: {
                     id: true, nome: true, email: true, telefone: true, usuarioadmin: true
